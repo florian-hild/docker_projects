@@ -48,7 +48,7 @@ docker logs unifi01
 docker exec -it unifi01 /bin/bash
 ```
 
-## How to change upstream gateway in unifi access point
+## How to change upstream gateway in unifi access point:
 ---
 ```bash
 ssh <IP of AP>

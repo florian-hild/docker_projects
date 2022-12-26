@@ -1,11 +1,11 @@
 ---
 
-version: '3'
+# version: '3.2'
 services:
   homeassistant:
-    container_name: homeassistant01
+    container_name: hass01
     image: "ghcr.io/home-assistant/raspberrypi4-64-homeassistant:stable"
-    privileged: true
+    privileged: false
     user: 1000:1000
     restart: unless-stopped
     # command: [ "python", "-m", "homeassistant", "--config", "/config", "--log-rotate-days", '3' ]
@@ -16,10 +16,38 @@ services:
       - /home/northdakota/homeassistant01/www:/media:rw
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
-    network_mode: bridge
+    networks:
+      backend:
+        ipv4_address: 172.20.0.2
     ports:
-      - 443:8123
+      - 8123:8123
       - 8943:8943
+    depends_on:
+      - mariadb
+  mariadb:
+    container_name: hass01-db
+    image: "mariadb:10.9.4"
+    privileged: false
+    user: 1000:1000
+    restart: unless-stopped
+    environment:
+      - MARIADB_ROOT_PASSWORD=qwertz#2022
+      - TZ='Europe/Berlin'
+    volumes:
+      - /home/northdakota/homeassistant01_db:/var/lib/mysql
+      - /home/northdakota/homeassistant01/sql:/docker-entrypoint-initdb.d
+    networks:
+      backend:
+        ipv4_address: 172.20.0.3
+
+networks:
+  backend:
+    name: hass01-backend
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/29
+          gateway: 172.20.0.1
 
 ...
 

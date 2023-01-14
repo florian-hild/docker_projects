@@ -1,10 +1,9 @@
 ---
 
-# version: '3.2'
 services:
   homeassistant:
     container_name: hass01
-    image: "ghcr.io/home-assistant/raspberrypi4-64-homeassistant:stable"
+    image: ghcr.io/home-assistant/raspberrypi4-64-homeassistant:stable
     privileged: false
     user: 1000:1000
     restart: unless-stopped
@@ -24,9 +23,10 @@ services:
       - 8943:8943
     depends_on:
       - mariadb
+
   mariadb:
     container_name: hass01-db
-    image: "mariadb:10.9.4"
+    image: mariadb:jammy
     privileged: false
     user: 1000:1000
     restart: unless-stopped

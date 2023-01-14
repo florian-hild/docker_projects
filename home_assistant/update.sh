@@ -7,8 +7,8 @@
 #-------------------------------------------------------------------------------
 
 export LANG=C
-declare -r __SCRIPT_VERSION__='1.0'
-declare -r docker_compose_file='docker-compose_homeassistant01.yml'
+declare -r __SCRIPT_VERSION__='2.0'
 
-docker-compose -f ${docker_compose_file} stop
+docker-compose -f ${1:-"docker-compose.yml"} pull
+docker-compose -f ${1:-"docker-compose.yml"} restart
 

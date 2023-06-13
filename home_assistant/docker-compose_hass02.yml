@@ -3,7 +3,7 @@
 services:
   homeassistant:
     container_name: hass02
-    image: "ghcr.io/home-assistant/home-assistant:stable"
+    image: homeassistant/home-assistant:stable
     privileged: false
     user: 1000:1000
     restart: unless-stopped
@@ -26,7 +26,7 @@ services:
 
   mariadb:
     container_name: hass02-db
-    image: "mariadb:10.9.4"
+    image: mariadb:lts
     privileged: false
     user: 1000:1000
     restart: unless-stopped
@@ -40,18 +40,9 @@ services:
       backend:
         ipv4_address: 172.20.0.3
 
-  test:
-    container_name: hass02-test
-    image: "rockylinux:9"
-    tty: true
-    networks:
-      backend:
-        ipv4_address: 172.20.0.4
-
-
   # nodered:
   #   container_name: homeassistant02_nodered
-  #   image: "nodered/node-red:latest-minimal"
+  #   image: nodered/node-red:latest-minimal
   #   privileged: false
   #   user: 1000:1000
   #   restart: unless-stopped

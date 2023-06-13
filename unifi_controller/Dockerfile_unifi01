@@ -1,4 +1,4 @@
-FROM jacobalberty/unifi:v7.2.95
+FROM jacobalberty/unifi:v7.4.156
 
 ARG container_uid
 ARG container_gid

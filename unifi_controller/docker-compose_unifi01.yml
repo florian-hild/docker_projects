@@ -5,11 +5,11 @@ services:
     container_name: unifi01
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ./Dockerfile_unifi01
       args:
         container_uid: 1000
         container_gid: 1000
-    image: local/unifi
+    # image: local/unifi
     init: true
     restart: unless-stopped
     user: 1000:1000

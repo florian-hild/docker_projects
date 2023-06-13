@@ -17,10 +17,15 @@ for container in "${containers[@]}"; do
 done
 
 echo "Pull images:"
-docker-compose -f ${1:-"docker-compose.yml"} pull
+docker-compose -f ${1:-"docker-compose.yml"} build \
+  --pull \
+  --no-cache
 
 echo "Build and restart containers:"
-docker-compose -f ${1:-"docker-compose.yml"} up -d --remove-orphans
+docker-compose -f ${1:-"docker-compose.yml"} up \
+  --force-recreate \
+  --detach \
+  --remove-orphans
 
 echo "Docker cleanup:"
 docker system prune -f

@@ -20,21 +20,6 @@ unifi
 mkdir -p unifi/{data,log}
 ```
 
-docker-compose variables are stored in the .env file located in the same directorie.
-```bash
-vim .env
-# env file for unifi_controller docker-compose
-container_name=unifi01
-uid=1000
-gid=1000
-base_dir=/usr/local/share/unifi
-macvlan_name=unifi01
-interface=ens18
-ipv4_address=10.0.0.30
-ipv4_network=10.0.0.0/24
-ipv4_gateway=10.0.0.1
-```
-
 ## Deploy container:
 ---
 ```bash

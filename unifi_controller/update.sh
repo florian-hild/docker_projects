@@ -16,18 +16,21 @@ for container in "${containers[@]}"; do
   i=${i}+1
 done
 
-echo "Pull images:"
+echo "Pull and build images:"
+echo "================================================================="
 docker-compose -f ${1:-"docker-compose.yml"} build \
   --pull \
   --no-cache
 
-echo "Build and restart containers:"
+echo "Create containers:"
+echo "================================================================="
 docker-compose -f ${1:-"docker-compose.yml"} up \
   --force-recreate \
   --detach \
   --remove-orphans
 
 echo "Docker cleanup:"
+echo "================================================================="
 docker system prune -f
 
 echo

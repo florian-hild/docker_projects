@@ -9,7 +9,7 @@
 export LANG=C
 declare -r __SCRIPT_VERSION__='3.0'
 
-readarray -t containers < <(/bin/grep -w container_name ${1:-"docker-compose.yml"} |awk '{print $2}')
+readarray -t containers < <(/bin/grep -w "^\s*container_name:" ${1:-"docker-compose.yml"} |awk '{print $2}')
 declare -i i=0
 for container in "${containers[@]}"; do
   containers[${i}]="${container};$(docker inspect --format '{{ index .Config.Labels "org.opencontainers.image.version"}}' ${container})"
@@ -18,9 +18,8 @@ done
 
 echo "Pull and build images:"
 echo "================================================================="
-docker-compose -f ${1:-"docker-compose.yml"} build \
-  --pull \
-  --no-cache
+docker-compose -f ${1:-"docker-compose.yml"} pull
+docker-compose -f ${1:-"docker-compose.yml"} build --no-cache
 
 echo "Create containers:"
 echo "================================================================="

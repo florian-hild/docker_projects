@@ -38,8 +38,8 @@ services:
     volumes:
       - '/etc/localtime:/etc/localtime:ro'
       - '/etc/timezone:/etc/timezone:ro'
-      - 'omada-data:/opt/tplink/EAPController/data:rw'
-      - 'omada-logs:/opt/tplink/EAPController/logs:rw'
+      - 'data:/opt/tplink/EAPController/data:rw'
+      - 'logs:/opt/tplink/EAPController/logs:rw'
 
 networks:
   omada:
@@ -47,8 +47,8 @@ networks:
     driver: bridge
 
 volumes:
-  omada-data:
+  data:
     driver: local
-  omada-logs:
+  logs:
     driver: local
 

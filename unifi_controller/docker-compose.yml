@@ -19,9 +19,9 @@ services:
     volumes:
       - '/etc/localtime:/etc/localtime:ro'
       - '/etc/timezone:/etc/timezone:ro'
-      - 'unifi-data:/config/data:rw'
-      - 'unifi-log:/config/log:rw'
-      - 'unifi-run:/config/run:rw'
+      - 'data:/config/data:rw'
+      - 'log:/config/log:rw'
+      - 'run:/config/run:rw'
     networks:
       unifi:
         ipv4_address: 10.0.0.30
@@ -39,11 +39,11 @@ networks:
           gateway: 10.0.0.1
 
 volumes:
-  unifi-data:
+  data:
     driver: local
-  unifi-log:
+  log:
     driver: local
-  unifi-run:
+  run:
     driver: local
 
 ...

@@ -5,25 +5,10 @@ This repo contains a Dockerized version of Ubiqiti Network's Unifi Controller.
 
 Image used from [jacobalerty](https://github.com/jacobalberty/unifi-docker).
 
-Changed UID and GID, so you can use the same as in the docker host system.
-
-## Preparation:
----
-Folder structure:
-```bash
-unifi
-  ├── data
-  └── log
-```
-
-```bash
-mkdir -p unifi/{data,log}
-```
-
 ## Deploy container:
 ---
 ```bash
-docker-compose up -d --build
+docker-compose up -d
 ```
 
 ## Troubleshooting:

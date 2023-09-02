@@ -1,0 +1,49 @@
+---
+
+services:
+  unifi-controller:
+    container_name: unifi
+    image: 'linuxserver/unifi-controller:latest'
+    init: false
+    restart: unless-stopped
+    stop_grace_period: 60s
+    healthcheck:
+      test: ["CMD", "curl" ,"--max-time", "5", "--head", "--location", "--fail", "--insecure", "--silent", "https://127.0.0.1:8443/"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+    environment:
+      - 'TZ=Europe/Berlin'
+      - 'PUID=999'
+      - 'PGID=999'
+    volumes:
+      - '/etc/localtime:/etc/localtime:ro'
+      - '/etc/timezone:/etc/timezone:ro'
+      - 'unifi-data:/config/data:rw'
+      - 'unifi-log:/config/log:rw'
+      - 'unifi-run:/config/run:rw'
+    networks:
+      unifi:
+        ipv4_address: 10.0.0.30
+
+networks:
+  unifi:
+    name: unifi-frontend
+    driver: macvlan
+    driver_opts:
+      parent: ens18
+    ipam:
+      config:
+        - subnet: 10.0.0.0/24
+          ip_range: 10.0.0.30/31
+          gateway: 10.0.0.1
+
+volumes:
+  unifi-data:
+    driver: local
+  unifi-log:
+    driver: local
+  unifi-run:
+    driver: local
+
+...

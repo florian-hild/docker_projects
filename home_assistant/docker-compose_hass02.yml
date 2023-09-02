@@ -3,59 +3,59 @@
 services:
   homeassistant:
     container_name: hass02
-    image: homeassistant/home-assistant:stable
+    image: 'homeassistant/home-assistant:stable'
     restart: unless-stopped
     privileged: false
-    user: 1000:1000
+    user: '1000:1000'
     environment:
-      - TZ='Europe/Berlin'
+      - 'TZ=Europe/Berlin'
     volumes:
-      - /home/northdakota/homeassistant02:/config:rw
-      - /home/northdakota/homeassistant02/www:/media:rw
-      - /etc/localtime:/etc/localtime:ro
-      - /etc/timezone:/etc/timezone:ro
+      - '/home/northdakota/homeassistant02:/config:rw'
+      - '/home/northdakota/homeassistant02/www:/media:rw'
+      - '/etc/localtime:/etc/localtime:ro'
+      - '/etc/timezone:/etc/timezone:ro'
     networks:
       backend:
         ipv4_address: 172.20.0.2
     ports:
-      - 8123:8123
-      - 8943:8943
+      - '8123:8123'
+      - '8943:8943'
     depends_on:
       - mariadb
 
   mariadb:
     container_name: hass02-db
-    image: mariadb:lts
+    image: 'mariadb:lts'
     restart: unless-stopped
     privileged: false
-    user: 1000:1000
+    user: '1000:1000'
     environment:
-      - MARIADB_ROOT_PASSWORD=qwertz
-      - TZ='Europe/Berlin'
+      - 'MARIADB_ROOT_PASSWORD=qwertz'
+      - 'TZ=Europe/Berlin'
     volumes:
-      - /home/northdakota/homeassistant02_db:/var/lib/mysql
-      - /home/northdakota/homeassistant02/sql:/docker-entrypoint-initdb.d
+      - '/home/northdakota/homeassistant02_db:/var/lib/mysql'
+      - '/home/northdakota/homeassistant02/sql:/docker-entrypoint-initdb.d'
     networks:
       backend:
         ipv4_address: 172.20.0.3
 
   # nodered:
   #   container_name: hass02-nodered
-  #   image: nodered/node-red:latest-minimal
+  #   image: 'nodered/node-red:latest-minimal'
   #   restart: unless-stopped
   #   privileged: false
-  #   user: 1000:1000
+  #   user: '1000:1000'
   #   environment:
-  #     - TZ='Europe/Berlin'
+  #     - 'TZ=Europe/Berlin'
   #   volumes:
-  #     - <local data path>:/data
-  #     - /etc/localtime:/etc/localtime:ro
-  #     - /etc/timezone:/etc/timezone:ro
+  #     - '<local data path>:/data'
+  #     - '/etc/localtime:/etc/localtime:ro'
+  #     - '/etc/timezone:/etc/timezone:ro'
   #   networks:
   #     backend:
   #       ipv4_address: 172.20.0.4
   #   ports:
-  #     - 1880:1880
+  #     - '1880:1880'
 
 networks:
   backend:

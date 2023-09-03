@@ -1,4 +1,0 @@
-FROM homeassistant/raspberrypi4-homeassistant:stable
-RUN pip install --root-user-action=ignore --upgrade pip
-# See: https://github.com/mitch-dc/volkswagen_we_connect_id/blob/main/custom_components/volkswagen_we_connect_id/manifest.json
-RUN pip install --root-user-action=ignore weconnect>=0.54.0 ascii_magic>=2.0.0

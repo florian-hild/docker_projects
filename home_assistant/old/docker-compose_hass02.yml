@@ -10,11 +10,18 @@ services:
     environment:
       - 'TZ=Europe/Berlin'
     volumes:
-
-
+      - '/home/northdakota/homeassistant02:/config:rw'
+      - '/home/northdakota/homeassistant02/www:/media:rw'
       - '/etc/localtime:/etc/localtime:ro'
       - '/etc/timezone:/etc/timezone:ro'
-
+    networks:
+      backend:
+        ipv4_address: 172.20.0.2
+    ports:
+      - '8123:8123'
+      - '8943:8943'
+    depends_on:
+      - mariadb
 
   mariadb:
     container_name: hass02-db

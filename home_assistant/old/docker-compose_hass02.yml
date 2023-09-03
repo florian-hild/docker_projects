@@ -1,0 +1,63 @@
+---
+
+services:
+  homeassistant:
+    container_name: hass02
+    image: 'homeassistant/home-assistant:stable'
+    restart: unless-stopped
+    privileged: false
+    user: '1000:1000'
+    environment:
+      - 'TZ=Europe/Berlin'
+    volumes:
+
+
+      - '/etc/localtime:/etc/localtime:ro'
+      - '/etc/timezone:/etc/timezone:ro'
+
+
+  mariadb:
+    container_name: hass02-db
+    image: 'mariadb:lts'
+    restart: unless-stopped
+    privileged: false
+    user: '1000:1000'
+    environment:
+      - 'MARIADB_ROOT_PASSWORD=qwertz'
+      - 'TZ=Europe/Berlin'
+    volumes:
+      - '/home/northdakota/homeassistant02_db:/var/lib/mysql'
+      - '/home/northdakota/homeassistant02/sql:/docker-entrypoint-initdb.d'
+    networks:
+      backend:
+        ipv4_address: 172.20.0.3
+
+  # nodered:
+  #   container_name: hass02-nodered
+  #   image: 'nodered/node-red:latest-minimal'
+  #   restart: unless-stopped
+  #   privileged: false
+  #   user: '1000:1000'
+  #   environment:
+  #     - 'TZ=Europe/Berlin'
+  #   volumes:
+  #     - '<local data path>:/data'
+  #     - '/etc/localtime:/etc/localtime:ro'
+  #     - '/etc/timezone:/etc/timezone:ro'
+  #   networks:
+  #     backend:
+  #       ipv4_address: 172.20.0.4
+  #   ports:
+  #     - '1880:1880'
+
+networks:
+  backend:
+    name: hass02-backend
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/29
+          gateway: 172.20.0.1
+
+...
+

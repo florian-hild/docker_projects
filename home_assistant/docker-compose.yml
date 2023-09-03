@@ -33,7 +33,6 @@ services:
       - "${HOME}/homeassistant/www:/media:rw"
     networks:
       backend:
-        ipv4_address: 172.20.0.2
     ports:
       - '0.0.0.0:8123:8123/tcp'
       - '0.0.0.0:8943:8943/tcp'
@@ -61,16 +60,11 @@ services:
       - "${HOME}/homeassistant/sql:/docker-entrypoint-initdb.d:ro"
     networks:
       backend:
-        ipv4_address: 172.20.0.3
 
 networks:
   backend:
     name: hass-backend
     driver: bridge
-    ipam:
-      config:
-        - subnet: 172.20.0.0/29
-          gateway: 172.20.0.1
 
 volumes:
   storage:

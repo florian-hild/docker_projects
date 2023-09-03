@@ -44,6 +44,7 @@ services:
     container_name: hass-db
     image: 'mariadb:lts'
     restart: unless-stopped
+    stop_grace_period: 60s
     privileged: false
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "--wait=5", "--connect-timeout=5", "--host=localhost", "--user=root", "--password=$${MARIADB_ROOT_PASSWORD}" ]

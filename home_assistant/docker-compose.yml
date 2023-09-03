@@ -17,6 +17,7 @@ services:
       tags:
         - "local/homeassistant:stable"
     restart: unless-stopped
+    stop_grace_period: 60s
     privileged: false
     healthcheck:
       test: ["CMD", "wget" ,"--no-verbose", "--tries=1", "--timeout=5", "--spider", "--no-check-certificate", "--quiet", "http://127.0.0.1:8123/"]

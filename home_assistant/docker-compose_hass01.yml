@@ -12,10 +12,18 @@ services:
     environment:
       - 'TZ=Europe/Berlin'
     volumes:
+<<<<<<< HEAD
       - '/home/northdakota/homeassistant01:/config:rw'
       - '/home/northdakota/homeassistant01/www:/media:rw'
       - '/etc/localtime:/etc/localtime:ro'
       - '/etc/timezone:/etc/timezone:ro'
+=======
+      - /home/northdakota/homeassistant01:/config:rw
+      - /home/northdakota/homeassistant01/www:/media:rw
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - /sys:/sys:ro
+>>>>>>> e9f4d2b (update: 'update file' :arrow_up:)
     networks:
       backend:
         ipv4_address: 172.20.0.2

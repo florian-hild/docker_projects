@@ -47,7 +47,7 @@ services:
     stop_grace_period: 60s
     privileged: false
     healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "--wait=5", "--connect-timeout=5", "--host=localhost", "--user=root", "--password=$${MARIADB_ROOT_PASSWORD}" ]
+      test: [ "CMD", "echo", "\"", "mysqladmin", "ping", "--wait=5", "--connect-timeout=5", "--host=localhost", "--user=root", "--password=$${MARIADB_ROOT_PASSWORD}", "\"" ]
       start_period: 10s
       interval: 15s
       timeout: 5s

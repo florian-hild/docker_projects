@@ -15,7 +15,7 @@ services:
             chown -R 1000:1000 /config/.[!.]*
         USER 1000:1000
       tags:
-        - "local/home_assistant-homeassistant:latest"
+        - "local/homeassistant:stable"
     restart: unless-stopped
     privileged: false
     healthcheck:

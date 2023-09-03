@@ -16,6 +16,7 @@ services:
       - /home/northdakota/homeassistant01/www:/media:rw
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
+      - /sys:/sys:ro
     networks:
       backend:
         ipv4_address: 172.20.0.2

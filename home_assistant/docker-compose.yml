@@ -16,7 +16,7 @@ services:
         USER 1000:1000
       tags:
         - "local/homeassistant:stable"
-    init: true
+    init: false
     privileged: false
     restart: unless-stopped
     healthcheck:

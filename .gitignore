@@ -1,4 +1,5 @@
 .env
-
+*.jsonl
+*.log
 *DS_Store
 

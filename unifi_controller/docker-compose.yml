@@ -24,20 +24,22 @@ services:
       - 'log:/config/log:rw'
       - 'run:/config/run:rw'
     networks:
-      frontend:
-        ipv4_address: 10.0.0.30
+      - frontend
+    ports:
+      - 0.0.0.0:8443:8443/tcp # Application GUI/API
+      - 0.0.0.0:3478:3478/udp # STUN
+      - 0.0.0.0:10001:10001/udp # Device discovery
+      - 0.0.0.0:8080:8080/tcp # Device and application communication
+      # - 1900:1900/udp # Make application discoverable on L2 network (optional)
+      # - 8843:8843 # HTTPS portal redirection (optional)
+      # - 8880:8880 # HTTP portal redirection (optional)
+      # - 6789:6789 # UniFi mobile speed test (optional)
+      # - 5514:5514/udp # Remote syslog capture (optional)
 
 networks:
   frontend:
     name: unifi-frontend
-    driver: macvlan
-    driver_opts:
-      parent: ens18
-    ipam:
-      config:
-        - subnet: 10.0.0.0/24
-          ip_range: 10.0.0.30/31
-          gateway: 10.0.0.1
+    driver: bridge
 
 volumes:
   data:

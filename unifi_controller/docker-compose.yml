@@ -56,7 +56,8 @@ services:
     volumes:
       - '/etc/localtime:/etc/localtime:ro'
       - '/etc/timezone:/etc/timezone:ro'
-      - 'db-data:/data:rw'
+      - 'db-data:/data/db:rw'
+      - 'db-config:/data/configdb:rw'
       - './mongo/init/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro'
     networks:
       - backend
@@ -73,6 +74,8 @@ volumes:
   config:
     driver: local
   db-data:
+    driver: local
+  db-config:
     driver: local
 
 ...

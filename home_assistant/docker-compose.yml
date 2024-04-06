@@ -30,9 +30,9 @@ services:
     volumes:
       - '/etc/localtime:/etc/localtime:ro'
       - '/etc/timezone:/etc/timezone:ro'
-      - "${HOME}/home-assistant-config:/config:rw"
+      - "${HOME}/home-assistant-config/siteA:/config:rw"
       - 'storage:/config/.storage:rw'
-      - "${HOME}/home-assistant-config/www:/media:rw"
+      - "${HOME}/home-assistant-config/siteA/www:/media:rw"
     networks:
       - backend
     ports:
@@ -61,7 +61,7 @@ services:
       - '/etc/localtime:/etc/localtime:ro'
       - '/etc/timezone:/etc/timezone:ro'
       - 'db-data:/var/lib/mysql:rw'
-      - "${HOME}/home-assistant-config/sql:/docker-entrypoint-initdb.d:ro"
+      - "${HOME}/home-assistant-config/siteA/sql:/docker-entrypoint-initdb.d:ro"
     networks:
       - backend
 
